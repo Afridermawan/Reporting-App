@@ -12,6 +12,7 @@ $app->post('/admin', 'App\Controllers\web\UserController:loginAsAdmin');
 $app->get('/', 'App\Controllers\web\UserController:getLogin')->setName('login');
 
 $app->post('/', 'App\Controllers\web\UserController:login');
+$app->get('/mail', 'App\Controllers\web\UserController:testMail');
 
 $app->group('', function() use ($app, $container) {
     $app->get('/home', 'App\Controllers\web\HomeController:index')->setName('home');
@@ -48,7 +49,7 @@ $app->group('', function() use ($app, $container) {
             $this->get('/restore/{id}', 'App\Controllers\web\UserController:restoreData')->setName('user.restore');
             $this->get('/edit/{id}', 'App\Controllers\web\UserController:getUpdateData')->setName('user.edit.data');
             $this->post('/edit/{id}', 'App\Controllers\web\UserController:postUpdateData')->setName('user.edit.data');
-            $this->get('/user/{id}/item', 'App\Controllers\web\UserController:getItemByadmin')->setName('user.item');
+            $this->get('/user/{id}/item', 'App\Controllers\web\UserController:getItemByadmin')->setName('user.item.admin');
         });
 
         $app->group('/article/', function() {
@@ -142,7 +143,7 @@ $app->group('', function() use ($app, $container) {
         $this->get('search', 'App\Controllers\web\ArticleController:search')
         ->setName('article-search');
     });
-    
+
     $app->group('/guard', function(){
         $this->get('/user/{id}/item', 'App\Controllers\web\UserController:getItemUser')->setName('user.item');
         $this->get('/user/{id}/add', 'App\Controllers\web\UserController:getNotUser')->setName('get.user.add');
