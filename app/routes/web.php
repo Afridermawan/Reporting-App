@@ -36,7 +36,6 @@ $app->group('', function() use ($app, $container) {
             $this->post('/users', 'App\Controllers\web\GroupController:setUserGroup')->setName('user.group.set');
             $this->get('/{id}/allusers', 'App\Controllers\web\GroupController:getNotMember')->setName('all.users.get');
             $this->post('/allusers', 'App\Controllers\web\GroupController:setMemberGroup')->setName('member.group.set');
-            $this->get('/user/{id}/item', 'App\Controllers\web\UserController:getItemByadmin')->setName('user.item');
         });
 
         $app->group('/user', function(){
@@ -49,6 +48,7 @@ $app->group('', function() use ($app, $container) {
             $this->get('/restore/{id}', 'App\Controllers\web\UserController:restoreData')->setName('user.restore');
             $this->get('/edit/{id}', 'App\Controllers\web\UserController:getUpdateData')->setName('user.edit.data');
             $this->post('/edit/{id}', 'App\Controllers\web\UserController:postUpdateData')->setName('user.edit.data');
+            $this->get('/user/{id}/item', 'App\Controllers\web\UserController:getItemByadmin')->setName('user.item');
         });
 
         $app->group('/article/', function() {
