@@ -99,7 +99,22 @@ class UserController extends BaseController
     }
 
     public function postUpdateData($request, $response, $args)
-    {
+    {$view->getEnvironment()->addGlobal('old', @$_SESSION['old']);
+    unset($_SESSION['old']);
+    $view->getEnvironment()->addGlobal('errors', @$_SESSION['errors']);
+    unset($_SESSION['errors']);
+
+    if (@$_SESSION['login']) {
+        $view->getEnvironment()->addGlobal('login', $_SESSION['login']);
+    }
+
+    if (@$_SESSION['user_group']) {
+        $view->getEnvironment()->addGlobal('user_group', $_SESSION['user_group']);
+    }
+
+    // if (@$_SESSION['search']) {
+    //  $view->getEnvironment()->addGlobal('search', $_SESSION['search']);
+    //  unset($_SESSION['search']);
         $user = new UserModel($this->db);
         $this->validator
             ->rule('required', ['username', 'name', 'email', 'phone', 'address', 'gender'])
